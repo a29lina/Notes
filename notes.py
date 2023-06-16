@@ -1,4 +1,6 @@
-import time
+from datetime import datetime
+current_datetime = datetime.now()
+
 
 def get_data():
     with open('notes.csv', 'r', encoding='utf-8') as file:
@@ -7,17 +9,19 @@ def get_data():
 
 
 def print_data(data):
-     data = open('notes.csv')
-     for text in data:
+    data = open('notes.csv')
+    for text in data:
         print(text)
+
 
 
 def add_data(data):
     print('Введите текст: ')
     note = input()
     if len(data) > 0:
-        data.pop()
-    data.append(f'{note}')
+       data.pop()
+    a = str(current_datetime)
+    data.append(a + ' ' + f'{note}')
 
 
 def write_data(data):
@@ -56,8 +60,11 @@ def menu():
     print('Если хотите найти заметку, нажмите 2')
     print('Если хотите редактировать зметку, нажмите 3')
     print('Если хотите увидеть весь список, нажмите 4')
-    print('Чтобы закончить работу, нажмите 0')
+    print('Чтобы закончить работу, нажмите 5')
+    
+
     num = int(input())
+   
     if num == 1:
         add_data(text)
         write_data(text)
@@ -76,8 +83,14 @@ def menu():
         print_data(text)
         print('\n')
         menu()
-    if num == 0:
-        quit()
+    if num == 5:
+        quit()       
+    else:
+        print("Неверный ввод, попробуйте снова")
+        menu()
+
+
+    
 
 text = get_data()
 menu()
